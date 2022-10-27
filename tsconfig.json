@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module":"ESNext",
+		"sourceMap": false,
+		"experimentalDecorators": false,
+		"newLine": "LF",
+		"strict": true,
+		"watch": true
+	},
+	"files": [
+		"xtal-vlist.ts",
+		"doc.mts"
+	],
+	"exclude":[
+		"build",
+		"dist",
+		"node_modules"
+	]
+
+}
