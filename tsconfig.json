@@ -9,7 +9,7 @@
 		"watch": true
 	},
 	"files": [
-		"xtal-vlist.ts",
+		"laissez-list.ts",
 		"doc.mts"
 	],
 	"exclude":[

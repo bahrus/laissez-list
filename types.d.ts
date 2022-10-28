@@ -22,7 +22,7 @@ export interface EndUserProps{
     rowIntersectionalSettings: Partial<BeLazyVirtualProps>;
 }
 
-export interface XtalVlistActions{
+export interface Actions{
     //setFocus(self: this): void;
     onList(self: this): {
         totalRows: number,
@@ -33,13 +33,13 @@ export interface XtalVlistActions{
 }
 
 /**
- * xtal-vlist provides a declarative "infinite scrolling" virtual list web component.
+ * xtal-vlist provides a declarative "lazy loading" list web component.
  */
 export abstract class LaissezList implements SimpleWCInfo<EndUserProps>{
     src: './laissez-list.js';
     tagName: 'laissez-list';
     props: EndUserProps;
-    methods: XtalVlistActions;
+    methods: Actions;
 }
 
 export type Package = [LaissezList];

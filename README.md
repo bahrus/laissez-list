@@ -7,7 +7,7 @@
 [![Actions Status](https://github.com/bahrus/laissez-list/workflows/CI/badge.svg)](https://github.com/bahrus/laissez-list/actions?query=workflow%3ACI)
 
 
-laissez-list provides a declarative "infinite scrolling" virtual list web component.
+laissez-list provides a declarative "lazy loading" list web component.
 
 [Demo 1 -- Simple](https://codepen.io/bahrus/pen/yLPjMER)
 
@@ -35,7 +35,7 @@ This is done by utilizing the intersectional settings:
 ## Example
 
 ```html
-<laissez-list style="height:600px;width:100%;" id="vlist"
+<laissez-list style="height:600px;width:100%;" id="lzlist"
     row-transform='{
         "span": "."
     }'
@@ -51,7 +51,7 @@ This is done by utilizing the intersectional settings:
     for (let i = 0; i < 100000; i++) {
         list.push(i);
     }
-    vlist.list = list;
+    lzlist.list = list;
 </script>
 ```
 

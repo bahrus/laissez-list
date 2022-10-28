@@ -1,34 +1,26 @@
-import {Actions, EndUserProps} from './types';
-import {CE} from 'trans-render/lib/CE.js';
-import {TemplMgmt, beTransformed, TemplMgmtProps} from 'trans-render/lib/mixins/TemplMgmt.js';
+import { CE } from 'trans-render/lib/CE.js';
+import { TemplMgmt, beTransformed } from 'trans-render/lib/mixins/TemplMgmt.js';
 import('be-deslotted/be-deslotted.js');
 import('be-lazy/be-lazy.js');
 import('be-oosoom/be-oosoom.js');
 import('be-repeated/be-repeated.js');
-
-export class LaissezList extends HTMLElement implements Actions{
-    #previousPageNo: number = 0;
-    containerParts!: WeakRef<HTMLDivElement>[];
-    #pageContainers: {[key: number]: WeakRef<HTMLDivElement>} = {};
-    onList({list}: this){
+export class LaissezList extends HTMLElement {
+    #previousPageNo = 0;
+    containerParts;
+    #pageContainers = {};
+    onList({ list }) {
         return {
             totalRows: list.length,
             newList: true,
-        }
+        };
     }
-    createVirtualList({
-            totalRows, rowTemplate,
-            rowTransform, pageSize, timestampKey,
-            rowIntersectionalSettings, minItemHeight
-    }: this): void {
+    createVirtualList({ totalRows, rowTemplate, rowTransform, pageSize, timestampKey, rowIntersectionalSettings, minItemHeight }) {
         const pages = Math.ceil(totalRows / pageSize);
-
-        if(pages > this.#previousPageNo){
+        if (pages > this.#previousPageNo) {
             const minHeight = minItemHeight * pageSize;
             const templHeight = (minItemHeight + 0.1) * pageSize;
-            
             const beLazyAttr = JSON.stringify(rowIntersectionalSettings);
-            const templS = String.raw`
+            const templS = String.raw `
     <div class=page style="min-height:${minHeight}px;">
         <template style="height:${templHeight}px" be-lazy='${beLazyAttr}'>
             <div class=rowContainer></div>
@@ -38,10 +30,10 @@ export class LaissezList extends HTMLElement implements Actions{
             const pageTempl = document.createElement('template');
             pageTempl.innerHTML = templS;
             const fragment = document.createDocumentFragment();
-            for(let i = this.#previousPageNo; i < pages; i++){
-                const pageContainer = pageTempl.content.cloneNode(true) as HTMLDivElement;
-                this.#pageContainers[i] = new WeakRef(pageContainer.firstElementChild as HTMLDivElement);
-                const bodyDiv = pageContainer.querySelector('template')!.content.querySelector('.rowContainer')!;
+            for (let i = this.#previousPageNo; i < pages; i++) {
+                const pageContainer = pageTempl.content.cloneNode(true);
+                this.#pageContainers[i] = new WeakRef(pageContainer.firstElementChild);
+                const bodyDiv = pageContainer.querySelector('template').content.querySelector('.rowContainer');
                 const lBound = i * pageSize;
                 const uBound = lBound + pageSize - 1;
                 const beRepeatedArgs = {
@@ -50,40 +42,36 @@ export class LaissezList extends HTMLElement implements Actions{
                     uBound,
                     transform: rowTransform,
                     timestampKey,
-                }
-                const rowTemplateClone = rowTemplate.cloneNode(true) as HTMLElement;
+                };
+                const rowTemplateClone = rowTemplate.cloneNode(true);
                 const beOosoomArgs = {
                     observeClosest: ".page"
                 };
                 rowTemplateClone.setAttribute('be-oosoom', JSON.stringify(beOosoomArgs));
                 rowTemplateClone.setAttribute('be-repeated', JSON.stringify(beRepeatedArgs));
                 bodyDiv.appendChild(rowTemplateClone);
-                if(i === pages - 1){
-                    const div = pageContainer.querySelector('.page') as HTMLDivElement;
+                if (i === pages - 1) {
+                    const div = pageContainer.querySelector('.page');
                     div.style.minHeight = minItemHeight + 'px';
                 }
                 fragment.appendChild(pageContainer);
                 this.#previousPageNo = i + 1;
             }
-            const container = this.containerParts[0].deref()!;
+            const container = this.containerParts[0].deref();
             container.appendChild(fragment);
-        }else if(pages < this.#previousPageNo){
-            for(let i = pages; i < this.#previousPageNo; i++){
+        }
+        else if (pages < this.#previousPageNo) {
+            for (let i = pages; i < this.#previousPageNo; i++) {
                 const pageContainer = this.#pageContainers[i].deref();
-                if(pageContainer !== undefined) pageContainer.remove();
-                
+                if (pageContainer !== undefined)
+                    pageContainer.remove();
             }
             this.#previousPageNo = pages;
         }
-
     }
-
 }
-
-export interface LaissezList extends EndUserProps{}
-
-const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
-    config:{
+const ce = new CE({
+    config: {
         tagName: 'xtal-vlist',
         propDefaults: {
             itemHeight: 30,
@@ -99,7 +87,7 @@ const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
                 enterDelay: 16,
                 exitDelay: 32,
             },
-            mainTemplate: String.raw`
+            mainTemplate: String.raw `
             <slot name=header></slot>
             <slot style=display:none name=row be-deslotted='{
                 "props": ".",
@@ -111,7 +99,7 @@ const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
             </div>
             <be-hive></be-hive>
             `,
-            styles: String.raw`
+            styles: String.raw `
 <style>
     .scroller{
         display:flex;
@@ -149,7 +137,7 @@ const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
                 type: 'String'
             }
         },
-        actions:{
+        actions: {
             ...beTransformed,
             onList: {
                 ifAllOf: ['rowTemplate', 'list'],
@@ -162,11 +150,4 @@ const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
     superclass: LaissezList,
     mixins: [TemplMgmt],
 });
-
-export const XtalVListExt = ce.classDef!;
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "laissez-list": LaissezList,
-    }
-}
+export const XtalVListExt = ce.classDef;
