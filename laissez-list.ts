@@ -84,7 +84,7 @@ export interface LaissezList extends EndUserProps{}
 
 const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
     config:{
-        tagName: 'xtal-vlist',
+        tagName: 'laissez-list',
         propDefaults: {
             itemHeight: 30,
             minItemHeight: 8,

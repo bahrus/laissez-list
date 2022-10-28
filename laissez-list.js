@@ -72,7 +72,7 @@ export class LaissezList extends HTMLElement {
 }
 const ce = new CE({
     config: {
-        tagName: 'xtal-vlist',
+        tagName: 'laissez-list',
         propDefaults: {
             itemHeight: 30,
             minItemHeight: 8,
