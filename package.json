@@ -22,18 +22,17 @@
   },
   "dependencies": {
     "trans-render": "0.0.631",
-    "xtal-element": "0.0.531",
-    "be-deslotted": "0.0.41",
-    "be-lazy": "0.0.25",
-    "be-oosoom": "0.0.9",
-    "be-repeated": "0.0.97"
+    "xtal-element": "0.0.532",
+    "be-deslotted": "0.0.42",
+    "be-lazy": "0.0.26",
+    "be-oosoom": "0.0.10",
+    "be-repeated": "0.0.99"
   },
   "devDependencies": {
     "@playwright/test": "1.27.1",
     "may-it-serve": "0.0.3",
     "@skypack/package-check": "0.2.2",
     "xtal-shell": "0.0.27",
-    "may-it-be": "0.0.170",
     "npm-watch": "0.11.0"
   },
   "exports": {

@@ -89,7 +89,7 @@ const ce = new CE({
             },
             mainTemplate: String.raw `
             <slot name=header></slot>
-            <slot style=display:none name=row be-deslotted='{
+            <slot name=row be-deslotted='{
                 "props": ".",
                 "propMap": {".": "rowTemplate"}
             }'></slot>
@@ -150,4 +150,4 @@ const ce = new CE({
     superclass: LaissezList,
     mixins: [TemplMgmt],
 });
-export const XtalVListExt = ce.classDef;
+export const LaissezListExt = ce.classDef;

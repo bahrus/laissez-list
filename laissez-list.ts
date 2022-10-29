@@ -101,7 +101,7 @@ const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
             },
             mainTemplate: String.raw`
             <slot name=header></slot>
-            <slot style=display:none name=row be-deslotted='{
+            <slot name=row be-deslotted='{
                 "props": ".",
                 "propMap": {".": "rowTemplate"}
             }'></slot>
@@ -163,7 +163,7 @@ const ce = new CE<EndUserProps & TemplMgmtProps, Actions>({
     mixins: [TemplMgmt],
 });
 
-export const XtalVListExt = ce.classDef!;
+export const LaissezListExt = ce.classDef!;
 
 declare global {
     interface HTMLElementTagNameMap {

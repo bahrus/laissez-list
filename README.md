@@ -13,7 +13,7 @@ It serves a similar purpose to "virtual list" components, but strictly speaking 
 
 Some advantages of a lazy-loaded list vs a virtual list:
 
-1.  If the user starts to edit a part of the list, and the scrolls away, and then back, focus might not be lost.  Other changes that might have been incurred by user interaction are also much less likely to be lost with this approach.
+1.  If the user starts to edit a part of the list, and then scrolls away, and then comes back again, focus might not be lost.  Other changes that might have been incurred by user interaction are also much less likely to be lost with this approach.
 2.  As content lazy loads, it permanently becomes searchable via the browser's search tool.
 3.  Because it leans more on native browser capabilities, it may work better as far as accessibility.
 4.  The complexity and size of the code base is reduced.
@@ -24,7 +24,7 @@ Disadvantages:
 
 To work well with laissez-list, components should use [be-oosoom](https://github.com/bahrus/be-oosoom) techniques to indicate how to "go to sleep" when scrolling out of view, which simply requires adding a "beOosoom" mapping property to the component.  [be-repeated](https://github.com/bahrus/be-repeated) is one such component that is be-oosoom friendly.
 
-Another feature that makes laissez-list's performance come close to a virtual list is use of "time-stamping" of items in the list, so that the renderer knows how to rebinds items which have changed since the last render. [xtal-tree](https://github.com/bahrus/xtal-tree) is an example of a time-stamping virtual model, that takes an object structure, and turns it into a flat list, with time-stamping support.
+Another feature that makes laissez-list's performance come close to a virtual list is use of "time-stamping" of items in the list, so that the renderer knows how to rebind items which have changed since the last render. [xtal-tree](https://github.com/bahrus/xtal-tree) is an example of a time-stamping virtual model, that takes an object structure, and turns it into a flat list, with time-stamping support.
 
 [Demo 1 -- Simple](https://codepen.io/bahrus/pen/yLPjMER)
 
