@@ -1,6 +1,6 @@
 {
   "name": "laissez-list",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "xtal-vlist provides a declarative virtual list web component",
   "module": "xtal-vlist.js",
   "main": "xtal-vlist.js",
