@@ -9,7 +9,7 @@
 
 laissez-list provides a declarative "lazy loading" list web component.
 
-It serves a similar purpose to "virtual list" components, but strictly speaking it isn't a virtual list because of one key difference:  It never removes content after its been created.
+It serves a similar purpose to "virtual list" components, but strictly speaking it isn't a virtual list because of one key difference:  It never removes content after it's been created.
 
 Some advantages of a lazy-loaded list vs a virtual list:
 
